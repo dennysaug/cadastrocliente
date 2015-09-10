@@ -1,11 +1,16 @@
 <?
 
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+//ini_set('display_errors',1);
+//error_reporting(E_ALL);
 require_once('classes/Cliente.php');
 
 $cliente = new Cliente();
 $clientes = $cliente->geraDezClientes();
+
+
+if(strcmp($_POST['ordem'],'desc') == 0)
+    krsort($clientes);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +32,13 @@ $clientes = $cliente->geraDezClientes();
             <h3>
                 LISTA DE CLIENTES
             </h3>
+
             <? if (isset($clientes)): ?>
+            <form action="./" method="post" role="form">
+                <button name="ordem" type="submit" value="asc" <?= ($_POST['ordem'] == 'asc') ? 'disabled' : '' ?> class="btn btn-success">ASC</button>
+                |
+                <button name="ordem" type="submit" value="desc" <?= ($_POST['ordem'] == 'desc') ? 'disabled' : '' ?> class="btn btn-danger">DESC</button>
+            </form>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -48,6 +59,9 @@ $clientes = $cliente->geraDezClientes();
                     </th>
                     <th>
                         Telefone
+                    </th>
+                    <th class="text-center">
+                        Visualizar
                     </th>
                 </tr>
                 </thead>
@@ -72,11 +86,16 @@ $clientes = $cliente->geraDezClientes();
                     <td>
                         <?= $dados->telefone ?>
                     </td>
+                    <td class="text-center">
+                        <a href="detalhe.php?id=<?= $n . '&hash=' . md5($n.date('Hms'))?>"><span aria-hidden="true" class="glyphicon glyphicon-eye-open"></span></a>
+                    </td>
                 </tr>
                 <? endforeach; ?>
                 </tbody>
             </table>
-            <? endif;?>
+            <? else:?>
+            <h2>Nenhum cliente cadastrado no sistema</h2>
+            <? endif; ?>
         </div>
     </div>
 </div>
