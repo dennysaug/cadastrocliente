@@ -1,4 +1,4 @@
-<?
+<?php
 if($_POST['voltar'])
     header('Location: ./');
 
@@ -20,7 +20,7 @@ $dados = $clientes[$index-1];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>POO - Detalhe - <?= $dados->nome ?></title>
+    <title>POO - Detalhe - <?php echo $dados->nome ?></title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -38,25 +38,25 @@ $dados = $clientes[$index-1];
                     <label for="">
                         Nome
                     </label>
-                    <input class="form-control"  type="text" value="<?= $dados->nome ?>" required />
+                    <input class="form-control"  type="text" value="<?php echo $dados->nome ?>" required />
                 </div>
                 <div class="form-group">
                     <label for="">
                         CPF
                     </label>
-                    <input class="form-control"  type="text" value="<?= $dados->cpf ?>" required />
+                    <input class="form-control"  type="text" value="<?php echo $dados->cpf ?>" required />
                 </div>
                 <div class="form-group">
                     <label for="">
                         Data Nascimento
                     </label>
-                    <input class="form-control"  type="text" value="<?= $dados->data_nascimento ?>" required />
+                    <input class="form-control"  type="text" value="<?php echo $dados->data_nascimento ?>" required />
                 </div>
                 <div class="form-group">
                     <label for="">
                         E-mail
                     </label>
-                    <input class="form-control"  type="type" value="<?= $dados->email ?>" required />
+                    <input class="form-control"  type="type" value="<?php echo $dados->email ?>" required />
                 </div>
 
                 <button type="submit" name="voltar" value="1"  class="btn btn-primary">

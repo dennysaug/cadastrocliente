@@ -1,14 +1,15 @@
-<?
+<?php
 
-//ini_set('display_errors',1);
-//error_reporting(E_ALL);
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
 require_once('classes/Cliente.php');
 
 $cliente = new Cliente();
 $clientes = $cliente->geraDezClientes();
 
 
-if(strcmp($_POST['ordem'],'desc') == 0)
+if(isset($_POST['ordem']) && strcmp($_POST['ordem'],'desc') == 0)
     krsort($clientes);
 
 ?>
@@ -33,11 +34,11 @@ if(strcmp($_POST['ordem'],'desc') == 0)
                 LISTA DE CLIENTES
             </h3>
 
-            <? if (isset($clientes)): ?>
+            <?php if (isset($clientes)): ?>
             <form action="./" method="post" role="form">
-                <button name="ordem" type="submit" value="asc" <?= ($_POST['ordem'] == 'asc') ? 'disabled' : '' ?> class="btn btn-success">ASC</button>
+                <button name="ordem" type="submit" value="asc" <?php echo (isset($_POST['ordem']) && $_POST['ordem'] == 'asc') ? 'disabled' : '' ?> class="btn btn-success">ASC</button>
                 |
-                <button name="ordem" type="submit" value="desc" <?= ($_POST['ordem'] == 'desc') ? 'disabled' : '' ?> class="btn btn-danger">DESC</button>
+                <button name="ordem" type="submit" value="desc" <?php echo (isset($_POST['ordem']) && $_POST['ordem'] == 'desc') ? 'disabled' : '' ?> class="btn btn-danger">DESC</button>
             </form>
             <table class="table table-striped table-hover">
                 <thead>
@@ -66,36 +67,36 @@ if(strcmp($_POST['ordem'],'desc') == 0)
                 </tr>
                 </thead>
                 <tbody>
-                <? foreach($clientes as $n => $dados): ?>
+                <?php foreach($clientes as $n => $dados): ?>
                 <tr>
                     <td>
-                        <?= ++$n ?>
+                        <?php echo ++$n ?>
                     </td>
                     <td>
-                        <?= $dados->nome ?>
+                        <?php echo $dados->nome ?>
                     </td>
                     <td>
-                        <?= $dados->cpf ?>
+                        <?php echo $dados->cpf ?>
                     </td>
                     <td>
-                        <?= $dados->data_nascimento ?>
+                        <?php echo $dados->data_nascimento ?>
                     </td>
                     <td>
-                        <?= $dados->email ?>
+                        <?php echo $dados->email ?>
                     </td>
                     <td>
-                        <?= $dados->telefone ?>
+                        <?php echo $dados->telefone ?>
                     </td>
                     <td class="text-center">
-                        <a href="detalhe.php?id=<?= $n . '&hash=' . md5($n.date('Hms'))?>"><span aria-hidden="true" class="glyphicon glyphicon-eye-open"></span></a>
+                        <a href="detalhe.php?id=<?php echo $n . '&hash=' . md5($n.date('Hms'))?>"><span aria-hidden="true" class="glyphicon glyphicon-eye-open"></span></a>
                     </td>
                 </tr>
-                <? endforeach; ?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
-            <? else:?>
+            <?php else:?>
             <h2>Nenhum cliente cadastrado no sistema</h2>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
