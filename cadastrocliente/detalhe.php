@@ -1,9 +1,9 @@
 <?php
-if($_POST['voltar'])
+if(isset($_POST['voltar']))
     header('Location: ./');
 
-//ini_set('display_errors',1);
-//error_reporting(E_ALL);
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 require_once('classes/Cliente.php');
 
 $cliente = new Cliente();
